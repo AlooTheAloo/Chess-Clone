@@ -51,9 +51,13 @@ public class Rook : MonoBehaviour
         if (Mathf.Abs(destX - currPosX) != 0 && Mathf.Abs(destY - currPosY) == 0
             || Mathf.Abs(destY - currPosY) != 0 && Mathf.Abs(destX - currPosX) == 0)
         {
-            for(int i = 0; i < Mathf.Max(Mathf.Abs(destX - currPosX),Mathf.Abs(destY - currPosY)); i++)
+            for(int i = 1; i < Mathf.Max(Mathf.Abs(destX - currPosX),Mathf.Abs(destY - currPosY)); i++)
             {
-
+                if(GameManager.PieceExists(destX - currPosX == 0 ? currPosX : destX - currPosX > 0 ? currPosX + i : currPosX - i,
+                    destY - currPosY == 0 ? currPosY : destY - currPosY > 0 ? currPosY + i : currPosY - i))
+                {
+                    return false;
+                }
             }
             RefreshPos(destX, destY);
             return true;
