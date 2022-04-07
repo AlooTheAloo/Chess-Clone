@@ -28,22 +28,7 @@ public class Knight : MonoBehaviour
         currPosY = list.IndexOf(Mathf.Round(destY));
     }
 
-    private GameObject PieceExists(int destX, int destY)
-    {
-        foreach (Movement piece in GameManager.board)
-        {
-            switch (piece.type)
-            {
-                case PieceType.Pawn:
-                    if (piece.GetComponent<Pawn>().currPosX == destX &&
-                    piece.GetComponent<Pawn>().currPosY == destY) return piece.gameObject; break;
-                case PieceType.Knight:
-                    if (piece.GetComponent<Knight>().currPosX == destX &&
-                    piece.GetComponent<Knight>().currPosY == destY) return piece.gameObject; break;
-            }
-        }
-        return null;
-    }
+
 
     public bool Validate(int destX, int destY)
     {
@@ -52,13 +37,12 @@ public class Knight : MonoBehaviour
             (Mathf.Abs(destX - currPosX) == 1 && Mathf.Abs(destY - currPosY) == 2))
         {
             //move valide
-            if (PieceExists(destX, destY))
+            if (GameManager.PieceExists(destX, destY))
             {
                 //Eat
-                if (PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
                 else
                 {
-                    
                     //Actually eat
                     RefreshPos(destX, destY);
                     return true;

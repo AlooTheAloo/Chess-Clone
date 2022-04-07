@@ -28,38 +28,27 @@ public class Bishop : MonoBehaviour
         currPosY = list.IndexOf(Mathf.Round(destY));
     }
 
-    private GameObject PieceExists(int destX, int destY)
-    {
-        foreach (Movement piece in GameManager.board)
-        {
-            switch (piece.type)
-            {
-                case PieceType.Pawn:
-                    if (piece.GetComponent<Pawn>().currPosX == destX &&
-                    piece.GetComponent<Pawn>().currPosY == destY) return piece.gameObject; break;
-                case PieceType.Knight:
-                    if (piece.GetComponent<Knight>().currPosX == destX &&
-                    piece.GetComponent<Knight>().currPosY == destY) return piece.gameObject; break;
-            }
-        }
-        return null;
-    }
+    
 
     public bool Validate(int destX, int destY)
     {
-   
 
-        if (Mathf.Abs(destX -currPosX) == Mathf.Abs(destY -currPosY)) { 
-            
-            
-            for (int i = 0; i < Mathf.Abs(destX - currPosX); i++)
-                if (PieceExists(
-                    destX > currPosX ? 
+        if (Mathf.Abs(destX - currPosX) == Mathf.Abs(destY - currPosY)) {
+            for (int i = 1; i < Mathf.Abs(destX - currPosX); i++)
+                if (GameManager.PieceExists(
+                    destX > currPosX ?
                     currPosX + i : currPosX - i,
                     destY > currPosY ?
-                    currPosY + i : currPosY - i)) return false;
-            RefreshPos(destX, destY);
-            return true; 
+                    currPosY + i : currPosY - i)) return false; 
+
+
+            if (!GameManager.PieceExists(destX, destY)) { RefreshPos(destX, destY); return true; }
+            if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+            else
+            {
+                RefreshPos(destX, destY);
+                return true;
+            }
         }
         else return false;
 
