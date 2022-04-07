@@ -77,26 +77,12 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             case PieceType.Pawn: valid = GetComponent<Pawn>().Validate(destX, destY); break;
             case PieceType.Knight: valid = GetComponent<Knight>().Validate(destX, destY); break;
             case PieceType.Bishop: valid = GetComponent<Bishop>().Validate(destX, destY); break;
-
+            case PieceType.Rook: valid = GetComponent<Rook>().Validate(destX, destY); break;
         }
         print(valid);
         if (valid)
             return new Vector2(targetX, targetY);
         else return origLocalPos;
 
-    }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
