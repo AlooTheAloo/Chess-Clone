@@ -49,13 +49,16 @@ public class Bishop : MonoBehaviour
     {
    
 
-        if (Mathf.Abs(destX -currPosX) == Mathf.Abs(destY -currPosY)) { RefreshPos(destX, destY);
+        if (Mathf.Abs(destX -currPosX) == Mathf.Abs(destY -currPosY)) { 
             
-            for(int i = 0; i < Mathf.Abs(destX - currPosX); i++)
-            {
-
-
-            }
+            
+            for (int i = 0; i < Mathf.Abs(destX - currPosX); i++)
+                if (PieceExists(
+                    destX > currPosX ? 
+                    currPosX + i : currPosX - i,
+                    destY > currPosY ?
+                    currPosY + i : currPosY - i)) return false;
+            RefreshPos(destX, destY);
             return true; 
         }
         else return false;
