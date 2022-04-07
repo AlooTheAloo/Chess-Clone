@@ -55,17 +55,17 @@ public class Pawn : MonoBehaviour
             {
                 if (destY - currPosY == 2)
                 {
-                    if (PieceExists(destX, destY) || PieceExists(destX, destY - 1)) return false;
+                    if (GameManager.PieceExists(destX, destY) || GameManager.PieceExists(destX, destY - 1)) return false;
                 }
-                else if (PieceExists(destX, destY)) return false;
+                else if (GameManager.PieceExists(destX, destY)) return false;
                 RefreshPos(destX, destY);
                 return true;
             }
             else
             {
-                if (PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destX - currPosX == 1)
+                if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destX - currPosX == 1)
                 {
-                    if (PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                    if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
                     //Eat the piece
                     RefreshPos(destX, destY);
                     return true;
@@ -77,16 +77,16 @@ public class Pawn : MonoBehaviour
         {
             if (destX - currPosX == 0 && destY - currPosY == 1)
             {
-                if (PieceExists(destX, destY)) return false;
+                if (GameManager.PieceExists(destX, destY)) return false;
                 RefreshPos(destX, destY);
                 return true;
             }
             else
             {
-                if (PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destX - currPosX == 1)
+                if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destX - currPosX == 1)
                 {
-                    if (PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
-                    print(PieceExists(destX, destY).GetComponent<Movement>().team);
+                    if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                    print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);
                     //Eat the piece
                     RefreshPos(destX, destY);
                     return true;
@@ -96,19 +96,6 @@ public class Pawn : MonoBehaviour
         }
     }
 
-    private GameObject PieceExists(int destX, int destY)
-    {
-        foreach(Movement piece in GameManager.board)
-        {
-            switch (piece.type)
-            {
-                case PieceType.Pawn: if (piece.GetComponent<Pawn>().currPosX == destX &&
-                        piece.GetComponent<Pawn>().currPosY == destY) return piece.gameObject; break;
-                case PieceType.Knight: if (piece.GetComponent<Knight>().currPosX == destX &&
-                 piece.GetComponent<Knight>().currPosY == destY) return piece.gameObject; break;
-            }
-        }
-        return null;
-    }
+    
 
 }
