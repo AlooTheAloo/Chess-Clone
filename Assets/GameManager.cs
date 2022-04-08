@@ -11,6 +11,8 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!isLocalPlayer) return;
+        Debug.Log("pee");
         instance = this;
         board = new List<Movement>(Object.FindObjectsOfType<Movement>());
 
@@ -20,8 +22,10 @@ public class GameManager : NetworkBehaviour
 
 
     [Command(requiresAuthority = false)]
-    public void CmdMovePiece(int xO, int yO, int xF, int yF)
+    public void CmdMovePiece(int con, int xO, int yO, int xF, int yF)
     {
+
+
         RPCMovePiece(xO, yO, xF, yF);
     }
 

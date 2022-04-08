@@ -52,12 +52,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             Vector2 rtn = RoundToNearest(transform.localPosition, 40);
             transform.localPosition = rtn;
-            Debug.Log(WorldToScreen(origLocalPos.x));
-            Debug.Log(WorldToScreen(origLocalPos.y));
-            Debug.Log(WorldToScreen(rtn.x));
-            Debug.Log(WorldToScreen(rtn.y));
-
-            GameManager.instance.CmdMovePiece(WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
+            GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId,  WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
         }
     }
 
