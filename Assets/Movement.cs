@@ -56,6 +56,20 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
+    public void MovePiece(int destX, int destY)
+    {
+        transform.localPosition = new Vector2(ScreenToWorld(destX), ScreenToWorld(destY));
+        switch (type) {
+            case PieceType.Pawn: GetComponent<Pawn>().RefreshPos(destX, destY); break;
+            case PieceType.Knight: GetComponent<Knight>().RefreshPos(destX, destY); break;
+            case PieceType.Bishop: GetComponent<Bishop>().RefreshPos(destX, destY); break;
+            case PieceType.Rook: GetComponent<Rook>().RefreshPos(destX, destY); break;
+            case PieceType.Queen: GetComponent<Queen>().RefreshPos(destX, destY); break;
+            case PieceType.King: GetComponent<King>().RefreshPos(destX, destY); break;
+        }
+
+             
+    }
     private int WorldToScreen(float pos)
     {
         List<float> list = new List<float>();
@@ -66,6 +80,15 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         return list.IndexOf(pos);
     }
 
+    private float ScreenToWorld(int pos)
+    {
+        List<float> list = new List<float>();
+        for (int i = (int)-maxBoardSize + 10; i < maxBoardSize; i += 40)
+        {
+            list.Add(i);
+        }
+        return list[pos];
+    }
 
     private Vector2 RoundToNearest(Vector2 pos, int mult)
     {

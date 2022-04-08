@@ -27,7 +27,7 @@ public class Pawn : MonoBehaviour
         currPosY = list.IndexOf(Mathf.Round(destY));
     }
     
-    void RefreshPos(int destX, int destY)
+    public void RefreshPos(int destX, int destY)
     {
         hasDoneFirstMove = true;
         currPosX = destX;
@@ -37,13 +37,13 @@ public class Pawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public bool Validate(int destX, int destY)
     {
         if (destX == currPosX && destY == currPosY) return false;
-
+        if (destY < currPosY) return false;
         Debug.Log(currPosX + ", " + currPosY + " to " + destX + ", " + destY);
         //Can do double
         if (!hasDoneFirstMove)

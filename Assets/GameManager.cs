@@ -5,6 +5,7 @@ using Mirror;
 
 public class GameManager : NetworkBehaviour
 {
+    private int myPlayer;
     public static List<Movement> board = new List<Movement>();
     public static GameManager instance;
     List<GameObject> myPieces = new List<GameObject>();
@@ -12,13 +13,42 @@ public class GameManager : NetworkBehaviour
     void Start()
     {
         if (!isLocalPlayer) return;
-        Debug.Log("pee");
         instance = this;
-        board = new List<Movement>(Object.FindObjectsOfType<Movement>());
-
+        
+        CmdNewPlayer();
     }
 
-    
+    [Command(requiresAuthority = false)]
+    private void CmdNewPlayer()
+    {
+        if (!isServer) return;
+        Debug.Log("New Connextion! There are now " + NetworkServer.connections.Count + "and the name of my object is " + gameObject.name);
+        int serverPlayer = Random.Range(0, 2); //0 - black, 1 - white
+        if(NetworkServer.connections.Count == 2) RPCChangeColor(serverPlayer);
+    }
+    [ClientRpc]
+    private void RPCChangeColor(int newColor)
+    {
+        if (isServer) NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(newColor);
+        else NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(1 - newColor);
+    }
+
+    public void SetMyPlayer(int newPlayer)
+    {
+        this.myPlayer = newPlayer;
+        if(newPlayer == 0) GameObject.Find("Pieces").transform.Find("AsWhite").gameObject.SetActive(true);
+        else GameObject.Find("Pieces").transform.Find("AsBlack").gameObject.SetActive(true);
+
+        board = new List<Movement>(Object.FindObjectsOfType<Movement>());
+        foreach (Movement go in board)
+            print(go.gameObject.name);
+    }
+
+
+    private void  OnConnectedToServer()
+    {
+        Debug.Log("Connection to server!");
+    }
 
 
     [Command(requiresAuthority = false)]
@@ -26,7 +56,7 @@ public class GameManager : NetworkBehaviour
     {
 
 
-        RPCMovePiece(xO, yO, xF, yF);
+        RPCMovePiece(xO, yO, xF, yF);   
     }
 
 
@@ -34,7 +64,11 @@ public class GameManager : NetworkBehaviour
     public void RPCMovePiece(int xO, int yO, int xF, int yF)
     {
         Debug.Log("Piece at " + xO + ", " + yO + " has been moved to " + xF + ", " + yF);
+        PieceExists(7 - xO, 7 - yO).GetComponent<Movement>().MovePiece(7 - xF, 7 - yF);
+        
     }
+
+    
 
     public static GameObject PieceExists(int destX, int destY)
     {
@@ -44,7 +78,8 @@ public class GameManager : NetworkBehaviour
             {
                 case PieceType.Pawn:
                     if (piece.GetComponent<Pawn>().currPosX == destX &&
-                    piece.GetComponent<Pawn>().currPosY == destY) return piece.gameObject; break;
+                    piece.GetComponent<Pawn>().currPosY == destY) return piece.gameObject;
+                    break;
                 case PieceType.Knight:
                     if (piece.GetComponent<Knight>().currPosX == destX &&
                     piece.GetComponent<Knight>().currPosY == destY) return piece.gameObject; break;

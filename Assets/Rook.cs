@@ -7,7 +7,7 @@ public class Rook : MonoBehaviour
     private const float maxBoardSize = 150f;
     public int currPosX = 0;
     public int currPosY = 0;
-    void RefreshPos(int destX, int destY)
+    public void RefreshPos(int destX, int destY)
     {
         currPosX = destX;
         currPosY = destY;
@@ -28,22 +28,7 @@ public class Rook : MonoBehaviour
         currPosY = list.IndexOf(Mathf.Round(destY));
     }
 
-    private GameObject PieceExists(int destX, int destY)
-    {
-        foreach (Movement piece in GameManager.board)
-        {
-            switch (piece.type)
-            {
-                case PieceType.Pawn:
-                    if (piece.GetComponent<Pawn>().currPosX == destX &&
-                    piece.GetComponent<Pawn>().currPosY == destY) return piece.gameObject; break;
-                case PieceType.Knight:
-                    if (piece.GetComponent<Knight>().currPosX == destX &&
-                    piece.GetComponent<Knight>().currPosY == destY) return piece.gameObject; break;
-            }
-        }
-        return null;
-    }
+
 
     public bool Validate(int destX, int destY)
     {
