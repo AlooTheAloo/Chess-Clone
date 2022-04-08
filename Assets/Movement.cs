@@ -124,11 +124,19 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
         if (valid)
         {
-
-            if(GameManager.PieceExists(destX, destY))
+            if (GameManager.PieceExists(destX, destY))
             {
                 Destroy(GameManager.PieceExists(destX, destY));
                 GameManager.instance.CmdDestroy(destX, destY);            
+            }
+            switch (type)
+            {
+                case PieceType.Pawn: GetComponent<Pawn>().RefreshPos(destX, destY); break;
+                case PieceType.Knight: GetComponent<Knight>().RefreshPos(destX, destY); break;
+                case PieceType.Bishop: GetComponent<Bishop>().RefreshPos(destX, destY); break;
+                case PieceType.Rook: GetComponent<Rook>().RefreshPos(destX, destY); break;
+                case PieceType.Queen: GetComponent<Queen>().RefreshPos(destX, destY); break;
+                case PieceType.King: GetComponent<King>().RefreshPos(destX, destY); break;
             }
             return new Vector2(targetX, targetY);
 

@@ -45,7 +45,6 @@ public class King : MonoBehaviour
                 }
                 else
                 {
-                    RefreshPos(destX, destY);
                     return true;
                 }
 
@@ -53,7 +52,6 @@ public class King : MonoBehaviour
             else
             {
 
-                RefreshPos(destX, destY);
                 return true;
             }
 

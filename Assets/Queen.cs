@@ -65,14 +65,12 @@ public class Queen : MonoBehaviour
                 if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
                 else
                 {
-                    RefreshPos(destX, destY);
                     return true;
                 }
 
             }
             else
             {
-                RefreshPos(destX, destY);
                 return true;
             }
 
@@ -87,11 +85,10 @@ public class Queen : MonoBehaviour
                     currPosY + i : currPosY - i)) return false;
 
 
-            if (!GameManager.PieceExists(destX, destY)) { RefreshPos(destX, destY); return true; }
+            if (!GameManager.PieceExists(destX, destY)) { return true; }
             if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
             else
             {
-                RefreshPos(destX, destY);
                 return true;
             }
         }

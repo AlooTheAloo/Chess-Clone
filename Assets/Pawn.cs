@@ -55,7 +55,6 @@ public class Pawn : MonoBehaviour
                     if (GameManager.PieceExists(destX, destY) || GameManager.PieceExists(destX, destY - 1)) return false;
                 }
                 else if (GameManager.PieceExists(destX, destY)) return false;
-                RefreshPos(destX, destY);
                 return true;
             }
             else
@@ -64,7 +63,6 @@ public class Pawn : MonoBehaviour
                 {
                     if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
                     //Eat the piece
-                    RefreshPos(destX, destY);
                     return true;
                 }
                 else return false;
@@ -75,7 +73,6 @@ public class Pawn : MonoBehaviour
             if (destX - currPosX == 0 && destY - currPosY == 1)
             {
                 if (GameManager.PieceExists(destX, destY)) return false;
-                RefreshPos(destX, destY);
                 return true;
             }
             else
@@ -85,7 +82,6 @@ public class Pawn : MonoBehaviour
                     if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
                     print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);
                     //Eat the piece
-                    RefreshPos(destX, destY);
                     return true;
                 }
                 else return false;

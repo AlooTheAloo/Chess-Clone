@@ -48,13 +48,11 @@ public class Knight : MonoBehaviour
                 else
                 {
                     //Actually eat
-                    RefreshPos(destX, destY);
                     return true;
                 }
             }
             else
             {
-                RefreshPos(destX, destY);
                 return true;
             }
         }

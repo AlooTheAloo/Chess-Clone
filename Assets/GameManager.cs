@@ -49,7 +49,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RPCChangeColor(int newColor)
     {
-        myPieces = newColor;
+        myPlayer = newColor;
         if (isServer) NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(newColor);
         else NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(1 - newColor);
     }

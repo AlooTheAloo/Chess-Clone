@@ -51,14 +51,12 @@ public class Rook : MonoBehaviour
                 if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
                 else
                 {
-                    RefreshPos(destX, destY);
                     return true;
                 }
 
             }
             else
             {
-                RefreshPos(destX, destY);
                 return true;
             }
             
