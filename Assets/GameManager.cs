@@ -26,7 +26,7 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    [ClientRpc]
+    [ClientRpc(includeOwner = false)]
     public void RPCMovePiece(int xO, int yO, int xF, int yF)
     {
         Debug.Log("Piece at " + xO + ", " + yO + " has been moved to " + xF + ", " + yF);
