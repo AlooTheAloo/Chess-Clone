@@ -1,22 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static List<Movement> board = new List<Movement>();
+    public static GameManager instance;
     List<GameObject> myPieces = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         board = new List<Movement>(Object.FindObjectsOfType<Movement>());
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    
+
+
+    [Command(requiresAuthority = false)]
+    public void CmdMovePiece(int xO, int yO, int xF, int yF)
     {
-        
+        RPCMovePiece(xO, yO, xF, yF);
+    }
+
+
+    [ClientRpc]
+    public void RPCMovePiece(int xO, int yO, int xF, int yF)
+    {
+        Debug.Log("Piece at " + xO + ", " + yO + " has been moved to " + xF + ", " + yF);
     }
 
     public static GameObject PieceExists(int destX, int destY)

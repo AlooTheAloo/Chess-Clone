@@ -43,7 +43,6 @@ public class King : MonoBehaviour
                     Debug.Log("ayo");
                     return false;
                 }
-
                 else
                 {
                     RefreshPos(destX, destY);

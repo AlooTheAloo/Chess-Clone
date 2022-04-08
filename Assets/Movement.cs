@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 using TMPro;
 using UnityEngine.EventSystems;
 using System.Linq;
+using Mirror;
 
 public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -14,7 +15,11 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private const float maxBoardSize = 150f;
     private Vector2 origPos;
     private Vector2 origLocalPos;
-    
+
+    private void Start()
+    {
+        NetworkServer.SpawnObjects();
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -47,8 +52,25 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             Vector2 rtn = RoundToNearest(transform.localPosition, 40);
             transform.localPosition = rtn;
+            Debug.Log(WorldToScreen(origLocalPos.x));
+            Debug.Log(WorldToScreen(origLocalPos.y));
+            Debug.Log(WorldToScreen(rtn.x));
+            Debug.Log(WorldToScreen(rtn.y));
+
+            GameManager.instance.CmdMovePiece(WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
         }
     }
+
+    private int WorldToScreen(float pos)
+    {
+        List<float> list = new List<float>();
+        for (int i = (int)-maxBoardSize + 10; i < maxBoardSize; i += 40)
+        {
+            list.Add(i);
+        }
+        return list.IndexOf(pos);
+    }
+
 
     private Vector2 RoundToNearest(Vector2 pos, int mult)
     {
