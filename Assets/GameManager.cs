@@ -19,7 +19,13 @@ public class GameManager : NetworkBehaviour
     }
 
     [Command(requiresAuthority =false)]
-    private void CmdDestroy(int x, int y)
+    public void CmdDestroy(int x, int y)
+    {
+            
+        Debug.Log(connectionToClient.connectionId);
+    }
+
+    public void RPCDestroy(int x, int y)
     {
 
     }

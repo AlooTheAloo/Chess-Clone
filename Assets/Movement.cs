@@ -127,7 +127,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
             if(GameManager.PieceExists(destX, destY))
             {
-                            
+                GameManager.instance.CmdDestroy(destX, destY);            
             }
             return new Vector2(targetX, targetY);
 
