@@ -95,6 +95,7 @@ public class GameManager : NetworkBehaviour
     {
         foreach (Movement piece in GameManager.board)
         {
+            if (piece == null) continue;
             switch (piece.type)
             {
                 case PieceType.Pawn:
