@@ -21,13 +21,20 @@ public class GameManager : NetworkBehaviour
     [Command(requiresAuthority =false)]
     public void CmdDestroy(int x, int y)
     {
-            
-        Debug.Log(connectionToClient.connectionId);
+        if (isLocalPlayer) //The server called this
+        {
+            NetworkClient.localPlayer.GetComponent<GameManager>().RPCDestroy(7 -x, 7-y);
+        }
+        else
+        {
+            RPCDestroy(7 - x, 7 - y);
+        }
     }
 
+    [ClientRpc(includeOwner = true)]
     public void RPCDestroy(int x, int y)
     {
-
+        Destroy(PieceExists(x, y));
     }
 
 
@@ -42,6 +49,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void RPCChangeColor(int newColor)
     {
+        myPieces = newColor;
         if (isServer) NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(newColor);
         else NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(1 - newColor);
     }
