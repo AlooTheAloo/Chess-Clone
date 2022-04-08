@@ -32,7 +32,8 @@ public class Knight : MonoBehaviour
 
     public bool Validate(int destX, int destY)
     {
-        Debug.Log(currPosX + ", " + currPosY + " to " + destX + ", " + destY);
+        if (destY == currPosY && destX == currPosX) return false;
+
         if ((Mathf.Abs(destX - currPosX) == 2 && Mathf.Abs(destY - currPosY) == 1) || 
             (Mathf.Abs(destX - currPosX) == 1 && Mathf.Abs(destY - currPosY) == 2))
         {

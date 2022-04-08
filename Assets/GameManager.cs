@@ -34,6 +34,15 @@ public class GameManager : MonoBehaviour
                 case PieceType.Bishop:
                     if (piece.GetComponent<Bishop>().currPosX == destX &&
                     piece.GetComponent<Bishop>().currPosY == destY) return piece.gameObject; break;
+                case PieceType.Rook:
+                    if (piece.GetComponent<Rook>().currPosX == destX &&
+                    piece.GetComponent<Rook>().currPosY == destY) return piece.gameObject; break;
+                case PieceType.Queen:
+                    if (piece.GetComponent<Queen>().currPosX == destX &&
+                    piece.GetComponent<Queen>().currPosY == destY) return piece.gameObject; break;
+                case PieceType.King:
+                    if (piece.GetComponent<King>().currPosX == destX &&
+                    piece.GetComponent<King>().currPosY == destY) return piece.gameObject; break;
             }
         }
         return null;

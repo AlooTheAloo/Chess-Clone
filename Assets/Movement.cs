@@ -52,6 +52,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private Vector2 RoundToNearest(Vector2 pos, int mult)
     {
+        
 
         List<float> list = new List<float>();
         for (int i =(int) -maxBoardSize + 10; i < maxBoardSize; i += mult)
@@ -78,8 +79,9 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             case PieceType.Knight: valid = GetComponent<Knight>().Validate(destX, destY); break;
             case PieceType.Bishop: valid = GetComponent<Bishop>().Validate(destX, destY); break;
             case PieceType.Rook: valid = GetComponent<Rook>().Validate(destX, destY); break;
+            case PieceType.Queen: valid = GetComponent<Queen>().Validate(destX, destY); break;
+            case PieceType.King: valid = GetComponent<King>().Validate(destX, destY); break;
         }
-        print(valid);
         if (valid)
             return new Vector2(targetX, targetY);
         else return origLocalPos;

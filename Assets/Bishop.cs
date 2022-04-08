@@ -32,6 +32,7 @@ public class Bishop : MonoBehaviour
 
     public bool Validate(int destX, int destY)
     {
+        if (destY == currPosY && destX == currPosX) return false;
 
         if (Mathf.Abs(destX - currPosX) == Mathf.Abs(destY - currPosY)) {
             for (int i = 1; i < Mathf.Abs(destX - currPosX); i++)

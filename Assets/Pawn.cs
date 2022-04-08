@@ -44,9 +44,6 @@ public class Pawn : MonoBehaviour
     {
         if (destX == currPosX && destY == currPosY) return false;
 
-
-
-
         Debug.Log(currPosX + ", " + currPosY + " to " + destX + ", " + destY);
         //Can do double
         if (!hasDoneFirstMove)

@@ -47,6 +47,7 @@ public class Rook : MonoBehaviour
 
     public bool Validate(int destX, int destY)
     {
+        if (destY == currPosY && destX == currPosX) return false;
         Debug.Log(currPosX + ", " + currPosY + " to " + destX + ", " + destY);
         if (Mathf.Abs(destX - currPosX) != 0 && Mathf.Abs(destY - currPosY) == 0
             || Mathf.Abs(destY - currPosY) != 0 && Mathf.Abs(destX - currPosX) == 0)
@@ -59,8 +60,23 @@ public class Rook : MonoBehaviour
                     return false;
                 }
             }
-            RefreshPos(destX, destY);
-            return true;
+            
+            if(GameManager.PieceExists(destX, destY))
+            {
+                if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                else
+                {
+                    RefreshPos(destX, destY);
+                    return true;
+                }
+
+            }
+            else
+            {
+                RefreshPos(destX, destY);
+                return true;
+            }
+            
         }
 
         return false;
