@@ -123,8 +123,19 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             case PieceType.King: valid = GetComponent<King>().Validate(destX, destY); break;
         }
         if (valid)
+        {
+
+            if(GameManager.PieceExists(destX, destY))
+            {
+                            
+            }
             return new Vector2(targetX, targetY);
+
+        }
         else return origLocalPos;
 
     }
+
+    
+
 }

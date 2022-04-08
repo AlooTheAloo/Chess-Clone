@@ -18,6 +18,13 @@ public class GameManager : NetworkBehaviour
         CmdNewPlayer();
     }
 
+    [Command(requiresAuthority =false)]
+    private void CmdDestroy(int x, int y)
+    {
+
+    }
+
+
     [Command(requiresAuthority = false)]
     private void CmdNewPlayer()
     {
