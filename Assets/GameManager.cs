@@ -111,6 +111,10 @@ public class GameManager : NetworkBehaviour
     {
         instance.myTurn = true;
         PieceExists(7 - xO, 7 - yO).GetComponent<Movement>().MovePiece(7 - xF, 7 - yF);
+        if(PieceExists(7 - xF, 7 - yF).GetComponent<Movement>().type == PieceType.Pawn && yF == 7)
+        {
+            PieceExists(7 - xF, 7 - yF).GetComponent<UnityEngine.UI.Image>().sprite = myPlayer == 0 ? whiteQueen : blackQueen;
+        }
         
     }
 
