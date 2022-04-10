@@ -109,6 +109,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc(includeOwner = false)]
     public void RPCMovePiece(int xO, int yO, int xF, int yF)
     {
+        if (!PieceExists(7 - xO, 7 - yO)) return;
         instance.myTurn = true;
         PieceExists(7 - xO, 7 - yO).GetComponent<Movement>().MovePiece(7 - xF, 7 - yF);
         if(PieceExists(7 - xF, 7 - yF).GetComponent<Movement>().type == PieceType.Pawn && yF == 7)
