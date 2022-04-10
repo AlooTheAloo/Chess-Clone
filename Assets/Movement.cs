@@ -163,7 +163,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if(type == PieceType.Pawn && destY == 7)
             {
                GetComponent<Pawn>().isQueen = true;
-                GetComponent<UnityEngine.UI.Image>().sprite = GameManager.instance.myPlayer == 1 ? GameManager.instance.whiteQueen : GameManager.instance.blackQueen;
+                GetComponent<UnityEngine.UI.Image>().sprite = GameManager.instance.myPlayer == 0 ? GameManager.instance.whiteQueen : GameManager.instance.blackQueen;
             }
             return new Vector2(targetX, targetY);
 
