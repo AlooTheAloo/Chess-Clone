@@ -56,9 +56,8 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (GameManager.instance.CheckForCheck(false))
             {
                 print("You are in check, you can't move there!");
-                transform.localPosition = origPos;
+                transform.localPosition = origLocalPos;
                 RefreshAllPos();
-
                 return;
             }
             GameManager.instance.myTurn = false;
