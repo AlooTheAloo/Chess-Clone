@@ -78,7 +78,7 @@ public class Pawn : MonoBehaviour
                 }
                 else
                 {
-                    if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destX - currPosX == 1)
+                    if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destY - currPosY == 1)
                     {
                         if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
                         //Eat the piece
@@ -96,7 +96,7 @@ public class Pawn : MonoBehaviour
                 }
                 else
                 {
-                    if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1)
+                    if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destY - currPosY == 1)
                     {
                         if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
                         print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);
