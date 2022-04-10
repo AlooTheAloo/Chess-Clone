@@ -160,7 +160,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 case PieceType.Queen: GetComponent<Queen>().RefreshPos(destX, destY); break;
                 case PieceType.King: GetComponent<King>().RefreshPos(destX, destY); break;
             }
-            if(type == PieceType.Pawn && targetY == 7)
+            if(type == PieceType.Pawn && destY == 7)
             {
                GetComponent<Pawn>().isQueen = true;
                 GetComponent<SpriteRenderer>().sprite = GameManager.instance.myPlayer == 1 ? GameManager.instance.whiteQueen : GameManager.instance.blackQueen;
