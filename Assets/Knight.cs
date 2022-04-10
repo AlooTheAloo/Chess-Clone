@@ -20,7 +20,6 @@ public class Knight : MonoBehaviour
 
     void FindCurrentPos(float destX, float destY)
     {
-        Debug.Log(gameObject.name + "Called with " + destX + ", " + destY);
         List<float> list = new List<float>();
         for (int i = (int)-maxBoardSize + 10; i < maxBoardSize; i += 40)
         {
@@ -28,7 +27,6 @@ public class Knight : MonoBehaviour
         }
         currPosX = list.IndexOf(Mathf.Round(destX));
         currPosY = list.IndexOf(Mathf.Round(destY));
-        Debug.Log("Finished math with " + currPosX + ", " + currPosY);
     }
 
 

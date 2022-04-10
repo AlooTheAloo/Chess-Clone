@@ -6,6 +6,7 @@ using Mirror;
 public class GameManager : NetworkBehaviour
 {
     private int myPlayer;
+    public bool myTurn = false;
     public static List<Movement> board = new List<Movement>();
     public static GameManager instance;
     List<GameObject> myPieces = new List<GameObject>();
@@ -18,7 +19,7 @@ public class GameManager : NetworkBehaviour
         CmdNewPlayer();
     }
 
-    [Command(requiresAuthority =false)]
+    [Command(requiresAuthority = false)]
     public void CmdDestroy(int x, int y)
     {
         if (isLocalPlayer) //The server called this
@@ -31,12 +32,36 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    [ClientRpc(includeOwner = true)]
+    [ClientRpc(includeOwner = false)]
     public void RPCDestroy(int x, int y)
     {
         Destroy(PieceExists(x, y));
     }
 
+    public bool CheckForCheck(bool mine)
+    {
+        foreach(Movement m in board)
+        {
+            print(m.gameObject.name);
+            //if (m == null) continue;
+            //if (m.team == Team.MINE != mine) continue;
+            List<int> validMoves = new List<int>();
+            for (int i = 0; i < 8; i++)
+                for(int j = 0; j < 8; j++)
+                    if(m.validate(i, j))
+                        validMoves.Add(i * 10 + j);
+            foreach (int mo in validMoves)
+                print(mo + ", " + m.gameObject.name);
+
+
+            foreach (int mo in validMoves)
+                if (PieceExists(mo / 10, mo - mo / 10 * 10)) // He can eat something
+                    if (PieceExists(mo / 10, mo - mo / 10 * 10).GetComponent<Movement>().type == PieceType.King
+                        && PieceExists(mo / 10, mo - mo / 10 * 10).GetComponent<Movement>().team == (mine ? Team.OTHER : Team.MINE)) //That something is a king
+                        return true;
+        }
+        return false;
+    }
 
     [Command(requiresAuthority = false)]
     private void CmdNewPlayer()
@@ -56,13 +81,13 @@ public class GameManager : NetworkBehaviour
 
     public void SetMyPlayer(int newPlayer)
     {
-        this.myPlayer = newPlayer;
+        myTurn = newPlayer == 0;
+        print("MyTurn : " + myTurn + ". New player : " + newPlayer);
+        myPlayer = newPlayer;
         if(newPlayer == 0) GameObject.Find("Pieces").transform.Find("AsWhite").gameObject.SetActive(true);
         else GameObject.Find("Pieces").transform.Find("AsBlack").gameObject.SetActive(true);
 
         board = new List<Movement>(Object.FindObjectsOfType<Movement>());
-        foreach (Movement go in board)
-            print(go.gameObject.name);
     }
 
 
@@ -75,8 +100,6 @@ public class GameManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdMovePiece(int con, int xO, int yO, int xF, int yF)
     {
-
-
         RPCMovePiece(xO, yO, xF, yF);   
     }
 
@@ -84,7 +107,7 @@ public class GameManager : NetworkBehaviour
     [ClientRpc(includeOwner = false)]
     public void RPCMovePiece(int xO, int yO, int xF, int yF)
     {
-        Debug.Log("Piece at " + xO + ", " + yO + " has been moved to " + xF + ", " + yF);
+        instance.myTurn = true;
         PieceExists(7 - xO, 7 - yO).GetComponent<Movement>().MovePiece(7 - xF, 7 - yF);
         
     }

@@ -23,20 +23,20 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (team != Team.MINE) return;
+        if (team != Team.MINE || !GameManager.instance.myTurn) return;
         origPos = transform.position;
         origLocalPos = transform.localPosition;
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        if (team != Team.MINE) return;
+        if (team != Team.MINE || !GameManager.instance.myTurn) return;
         gameObject.transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (team != Team.MINE) return;
+        if (team != Team.MINE || !GameManager.instance.myTurn) return;
         if (transform.localPosition.x > maxBoardSize ||
             transform.localPosition.x < -maxBoardSize ||
             transform.localPosition.y > maxBoardSize ||
@@ -52,7 +52,15 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             Vector2 rtn = RoundToNearest(transform.localPosition, 40);
             transform.localPosition = rtn;
-            GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId,  WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
+            if (rtn == origLocalPos) return;
+            if (GameManager.instance.CheckForCheck(false))
+            {
+
+                return;
+            }
+            GameManager.instance.myTurn = false;
+            GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId, WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
+                       
         }
     }
 
@@ -88,6 +96,20 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             list.Add(i);
         }
         return list[pos];
+    }
+
+    public bool validate(int destX, int destY)
+    {
+        switch (type)
+        {
+            case PieceType.Pawn: return GetComponent<Pawn>().Validate(destX, destY);
+            case PieceType.Knight: return GetComponent<Knight>().Validate(destX, destY);
+            case PieceType.Bishop: return GetComponent<Bishop>().Validate(destX, destY);
+            case PieceType.Rook: return GetComponent<Rook>().Validate(destX, destY); 
+            case PieceType.Queen: return GetComponent<Queen>().Validate(destX, destY); 
+            case PieceType.King: return GetComponent<King>().Validate(destX, destY); 
+        }
+        return false;
     }
 
     private Vector2 RoundToNearest(Vector2 pos, int mult)
