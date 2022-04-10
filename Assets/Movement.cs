@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         origPos = transform.position;
         origLocalPos = transform.localPosition;
     }
-    
+
     public void OnDrag(PointerEventData eventData)
     {
         if (team != Team.MINE || !GameManager.instance.myTurn) return;
@@ -55,12 +55,11 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (rtn == origLocalPos) return;
             if (GameManager.instance.CheckForCheck(false))
             {
-
                 return;
             }
             GameManager.instance.myTurn = false;
             GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId, WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
-                       
+
         }
     }
 
@@ -76,7 +75,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             case PieceType.King: GetComponent<King>().RefreshPos(destX, destY); break;
         }
 
-             
+
     }
     private int WorldToScreen(float pos)
     {
@@ -105,12 +104,28 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             case PieceType.Pawn: return GetComponent<Pawn>().Validate(destX, destY);
             case PieceType.Knight: return GetComponent<Knight>().Validate(destX, destY);
             case PieceType.Bishop: return GetComponent<Bishop>().Validate(destX, destY);
-            case PieceType.Rook: return GetComponent<Rook>().Validate(destX, destY); 
-            case PieceType.Queen: return GetComponent<Queen>().Validate(destX, destY); 
-            case PieceType.King: return GetComponent<King>().Validate(destX, destY); 
+            case PieceType.Rook: return GetComponent<Rook>().Validate(destX, destY);
+            case PieceType.Queen: return GetComponent<Queen>().Validate(destX, destY);
+            case PieceType.King: return GetComponent<King>().Validate(destX, destY);
         }
         return false;
     }
+
+    public List<int> Endanger(){
+        List<int> retval = new List<int>();
+        switch (type)
+        {
+            case PieceType.Pawn: retval = GetComponent<Pawn>().FindEndangeredPositions(); break;
+            case PieceType.Knight: retval = GetComponent<Knight>().FindEndangeredPositions(); break;
+            case PieceType.Bishop: retval = GetComponent<Bishop>().FindEndangeredPositions(); break;
+            case PieceType.Rook: retval = GetComponent<Rook>().FindEndangeredPositions(); break;
+            case PieceType.Queen: retval = GetComponent<Queen>().FindEndangeredPositions(); break;
+            case PieceType.King: retval = GetComponent<King>().FindEndangeredPositions(); break;
+        }
+        return retval;
+    }
+
+
 
     private Vector2 RoundToNearest(Vector2 pos, int mult)
     {

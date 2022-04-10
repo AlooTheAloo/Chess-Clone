@@ -35,11 +35,24 @@ public class Pawn : MonoBehaviour
         currPosY = destY;
     }
 
-    // Update is called once per frame
-    void Update()
+    public List<int> FindEndangeredPositions()
     {
-
+        List<int> retval = new List<int>();
+        if(GetComponent<Movement>().team == Team.MINE)
+        {
+            print("My pawn");
+            retval.Add((currPosX + 1) * 10 + currPosY + 1);
+            retval.Add((currPosX - 1) * 10 + currPosY + 1);
+        }
+        else
+        {
+            print("Other pawn");
+            retval.Add((currPosX + 1) * 10 + currPosY - 1);
+            retval.Add((currPosX - 1) * 10 + currPosY - 1);
+        }
+        return retval;
     }
+    
 
     public bool Validate(int destX, int destY)
     {

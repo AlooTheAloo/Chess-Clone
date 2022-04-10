@@ -28,7 +28,15 @@ public class Bishop : MonoBehaviour
         currPosY = list.IndexOf(Mathf.Round(destY));
     }
 
-    
+    public List<int> FindEndangeredPositions()
+    {
+        List<int> retval = new List<int>();
+        for (int i = 0; i < 7; i++)
+            for (int j = 0; j < 7; j++)
+                if (Validate(i, j))
+                    retval.Add(i * 10 + j);
+        return retval;
+    }
 
     public bool Validate(int destX, int destY)
     {

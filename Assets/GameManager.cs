@@ -43,25 +43,21 @@ public class GameManager : NetworkBehaviour
 
     public bool CheckForCheck(bool mine)
     {
-        foreach(Movement m in board)
+        List<int> endangeredPositions = new List<int>();
+        foreach (Movement m in board)
         {
             if (m == null) continue;
-            //if (m.team == Team.MINE != mine) continue;
-            List<int> validMoves = new List<int>();
-            for (int i = 0; i < 8; i++)
-                for(int j = 0; j < 8; j++)
-                    if(m.validate(i, j))
-                        validMoves.Add(i * 10 + j);
-            foreach (int mo in validMoves)
-                print(mo + ", " + m.gameObject.name);
+            if (mine != (m.team == Team.OTHER)) continue;
+            List<int> newEndangeredPos = m.Endanger();
 
-
-            foreach (int mo in validMoves)
-                if (PieceExists(mo / 10, mo - mo / 10 * 10)) // He can eat something
-                    if (PieceExists(mo / 10, mo - mo / 10 * 10).GetComponent<Movement>().type == PieceType.King
-                        && PieceExists(mo / 10, mo - mo / 10 * 10).GetComponent<Movement>().team == (mine ? Team.OTHER : Team.MINE)) //That something is a king
-                        return true;
+            foreach(int pos in newEndangeredPos)
+            {
+                endangeredPositions.Add(pos);
+            }
         }
+        foreach (int n in endangeredPositions)
+            print(n);
+
         return false;
     }
 
@@ -115,6 +111,7 @@ public class GameManager : NetworkBehaviour
         if(PieceExists(7 - xF, 7 - yF).GetComponent<Movement>().type == PieceType.Pawn && yF == 7)
         {
             PieceExists(7 - xF, 7 - yF).GetComponent<UnityEngine.UI.Image>().sprite = myPlayer == 0 ? whiteQueen : blackQueen;
+            PieceExists(7 - xF, 7 - yF).GetComponent<Pawn>().isQueen = true;
         }
         
     }

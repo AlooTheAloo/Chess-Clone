@@ -29,7 +29,15 @@ public class Rook : MonoBehaviour
     }
 
 
-
+    public List<int> FindEndangeredPositions()
+    {
+        List<int> retval = new List<int>();
+        for (int i = 0; i < 7; i++)
+            for (int j = 0; j < 7; j++)
+                if (Validate(i, j))
+                    retval.Add(i * 10 + j);
+        return retval;
+    }
     public bool Validate(int destX, int destY)
     {
         if (destY == currPosY && destX == currPosX) return false;
