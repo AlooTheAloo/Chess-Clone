@@ -5,10 +5,13 @@ using Mirror;
 
 public class GameManager : NetworkBehaviour
 {
-    private int myPlayer;
+    [HideInInspector]
+    public int myPlayer;
     public bool myTurn = false;
     public static List<Movement> board = new List<Movement>();
     public static GameManager instance;
+    public Sprite whiteQueen;
+    public Sprite blackQueen;
     List<GameObject> myPieces = new List<GameObject>();
     // Start is called before the first frame update
     void Start()

@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  myPlayer: 0
+  myTurn: 0
+  whiteQueen: {fileID: 7217768898871757853, guid: 8083b6be60cf1c74a9464e2c6cc958e0, type: 3}
+  blackQueen: {fileID: 3011726807458644818, guid: 8083b6be60cf1c74a9464e2c6cc958e0, type: 3}
 --- !u!114 &8559977900770218680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,5 +65,5 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 2
-  m_AssetId: 
+  m_AssetId: 9957e59eb64722442931b71bf1f4dc09
   hasSpawned: 0
