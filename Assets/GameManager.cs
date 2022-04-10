@@ -58,9 +58,19 @@ public class GameManager : NetworkBehaviour
                 endangeredPositions.Add(pos);
             }
         }
-        //foreach (int n in endangeredPositions)
-         //   print(n);
+        
+        foreach(string s in endangeredPositions)
+        {
+            //For example, you have -1|1 it will convert to {-1, 1}, and -1 is length > 1
+            if (s.Split('|')[0].Length > 1 || s.Split('|')[1].Length > 1) continue;
 
+            if(PieceExists(s.Split('|')[0].ToCharArray()[0] - '0', s.Split('|')[1].ToCharArray()[0] - '0')){
+                if(PieceExists(s.Split('|')[0].ToCharArray()[0] - '0', s.Split('|')[1].ToCharArray()[0] - '0').GetComponent<Movement>().type == PieceType.King)
+                {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -68,7 +78,7 @@ public class GameManager : NetworkBehaviour
     private void CmdNewPlayer()
     {
         if (!isServer) return;
-        Debug.Log("New Connextion! There are now " + NetworkServer.connections.Count + "and the name of my object is " + gameObject.name);
+        Debug.Log("New Connection! There are now " + NetworkServer.connections.Count + " and the name of my object is " + gameObject.name);
         int serverPlayer = Random.Range(0, 2); //0 - black, 1 - white
         if(NetworkServer.connections.Count == 2) RPCChangeColor(serverPlayer);
     }

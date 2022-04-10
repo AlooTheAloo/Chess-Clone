@@ -12,7 +12,12 @@ public class Pawn : MonoBehaviour
     public bool isQueen = false;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
+    {
+        FindForBack();
+    }
+
+    public void FindForBack()
     {
         FindCurrentPos(transform.localPosition.x, transform.localPosition.y);
     }

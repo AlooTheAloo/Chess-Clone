@@ -15,6 +15,11 @@ public class Knight : MonoBehaviour
     }
     private void Start()
     {
+        FindForBack();
+    }
+
+    public void FindForBack()
+    {
         FindCurrentPos(transform.localPosition.x, transform.localPosition.y);
     }
 

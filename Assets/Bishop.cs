@@ -14,6 +14,11 @@ public class Bishop : MonoBehaviour
     }
     private void Start()
     {
+        FindForBack();
+    }
+
+    public void FindForBack()
+    {
         FindCurrentPos(transform.localPosition.x, transform.localPosition.y);
     }
 

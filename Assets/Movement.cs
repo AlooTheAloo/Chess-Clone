@@ -55,6 +55,10 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             if (rtn == origLocalPos) return;
             if (GameManager.instance.CheckForCheck(false))
             {
+                print("You are in check, you can't move there!");
+                transform.localPosition = origPos;
+                RefreshAllPos();
+
                 return;
             }
             GameManager.instance.myTurn = false;
@@ -62,6 +66,25 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         }
     }
+
+    public void RefreshAllPos()
+    {
+        switch (type)
+        {
+            case PieceType.Pawn: GetComponent<Pawn>().FindForBack(); break;
+            case PieceType.Knight: GetComponent<Knight>().FindForBack(); break;
+            case PieceType.Bishop: GetComponent<Bishop>().FindForBack(); break;
+            case PieceType.Rook: GetComponent<Rook>().FindForBack(); break;
+            case PieceType.Queen: GetComponent<Queen>().FindForBack(); break;
+            case PieceType.King: GetComponent<King>().FindForBack(); break;
+        }
+        
+    }
+
+
+
+    
+
 
     public void MovePiece(int destX, int destY)
     {
