@@ -43,16 +43,16 @@ public class GameManager : NetworkBehaviour
 
     public bool CheckForCheck(bool mine)
     {
-        List<int> endangeredPositions = new List<int>();
+        List<string> endangeredPositions = new List<string>();
         foreach (Movement m in board)
         {
             
             if (m == null) continue;
             if (mine == (m.team == Team.OTHER)) continue;
             Debug.Log("Object : " + m.gameObject.name + " " + m.team);
-            List<int> newEndangeredPos = m.Endanger();
+            List<string> newEndangeredPos = m.Endanger();
 
-            foreach(int pos in newEndangeredPos)
+            foreach(string pos in newEndangeredPos)
             {
                 print(pos);
                 endangeredPositions.Add(pos);

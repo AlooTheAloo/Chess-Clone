@@ -111,8 +111,8 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         return false;
     }
 
-    public List<int> Endanger(){
-        List<int> retval = new List<int>();
+    public List<string> Endanger(){
+        List<string> retval = new List<string>();
         switch (type)
         {
             case PieceType.Pawn: retval = GetComponent<Pawn>().FindEndangeredPositions(); break;
@@ -129,8 +129,6 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private Vector2 RoundToNearest(Vector2 pos, int mult)
     {
-        
-
         List<float> list = new List<float>();
         for (int i =(int) -maxBoardSize + 10; i < maxBoardSize; i += mult)
         {

@@ -29,13 +29,13 @@ public class Knight : MonoBehaviour
         currPosY = list.IndexOf(Mathf.Round(destY));
     }
 
-    public List<int> FindEndangeredPositions()
+    public List<string> FindEndangeredPositions()
     {
-        List<int> retval = new List<int>();
-        for(int i = 0; i < 7; i++)
-            for(int j = 0; j < 7; j++)
-                if(Validate(i, j))
-                    retval.Add(i * 10 + j);
+        List<string> retval = new List<string>();
+        for (int i = 0; i < 7; i++)
+            for (int j = 0; j < 7; j++)
+                if (Validate(i, j))
+                    retval.Add(i + "|" + j);
         return retval;
     }
 

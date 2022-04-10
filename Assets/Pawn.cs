@@ -35,20 +35,20 @@ public class Pawn : MonoBehaviour
         currPosY = destY;
     }
 
-    public List<int> FindEndangeredPositions()
+    public List<string> FindEndangeredPositions()
     {
-        List<int> retval = new List<int>();
+        List<string> retval = new List<string>();
         if(GetComponent<Movement>().team == Team.MINE)
         {
             print("My pawn");
-            retval.Add((currPosX + 1) * 10 + currPosY + 1);
-            retval.Add((currPosX - 1) * 10 + currPosY + 1);
+            retval.Add(currPosX + 1 + "|" + (currPosY + 1));
+            retval.Add(currPosX - 1 + "|" + (currPosY + 1));
         }
         else
         {
             print("Other pawn");
-            retval.Add((currPosX + 1) * 10 + currPosY - 1);
-            retval.Add((currPosX - 1) * 10 + currPosY - 1);
+            retval.Add(currPosX + 1 + "|" + (currPosY - 1));
+            retval.Add(currPosX - 1 + "|" + (currPosY - 1));
         }
         return retval;
     }
