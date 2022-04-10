@@ -43,8 +43,7 @@ public class Pawn : MonoBehaviour
     public bool Validate(int destX, int destY)
     {
         if (destX == currPosX && destY == currPosY) return false;
-        if (destY < currPosY) return false;
-        Debug.Log(currPosX + ", " + currPosY + " to " + destX + ", " + destY);
+        if (destY <= currPosY) return false;
         //Can do double
         if (!hasDoneFirstMove)
         {
@@ -77,7 +76,7 @@ public class Pawn : MonoBehaviour
             }
             else
             {
-                if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destX - currPosX == 1)
+                if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1)
                 {
                     if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
                     print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);

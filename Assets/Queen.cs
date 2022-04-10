@@ -7,7 +7,7 @@ public class Queen : MonoBehaviour
     private const float maxBoardSize = 150f;
     public int currPosX = 0;
     public int currPosY = 0;
-    public void RefreshPos(int destX, int destY)
+    public void RefreshPos  (int destX, int destY)
     {
         currPosX = destX;
         currPosY = destY;
