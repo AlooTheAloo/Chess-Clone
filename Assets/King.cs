@@ -45,7 +45,7 @@ public class King : MonoBehaviour
         if (Mathf.Abs(destX - currPosX) <= 1 && Mathf.Abs(destY - currPosY) <= 1)
         {
             if (GameManager.PieceExists(destX, destY))
-                return !(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE);    
+                return !(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team);    
             else
                 return true;
         }

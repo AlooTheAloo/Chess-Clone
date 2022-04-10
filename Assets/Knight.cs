@@ -50,7 +50,7 @@ public class Knight : MonoBehaviour
             if (GameManager.PieceExists(destX, destY))
             {
                 //Eat
-                if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
                 else
                 {
                     //Actually eat

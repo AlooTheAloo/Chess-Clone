@@ -75,7 +75,7 @@ public class Pawn : MonoBehaviour
                 {
                     if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destX - currPosX == 1)
                     {
-                        if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                        if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
                         //Eat the piece
                         return true;
                     }
@@ -93,7 +93,7 @@ public class Pawn : MonoBehaviour
                 {
                     if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1)
                     {
-                        if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                        if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
                         print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);
                         //Eat the piece
                         return true;
@@ -119,7 +119,7 @@ public class Pawn : MonoBehaviour
 
                 if (GameManager.PieceExists(destX, destY))
                 {
-                    if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                    if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
                     else
                     {
                         return true;
@@ -143,7 +143,7 @@ public class Pawn : MonoBehaviour
 
 
                 if (!GameManager.PieceExists(destX, destY)) { return true; }
-                if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+                if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
                 else
                 {
                     return true;

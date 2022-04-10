@@ -46,17 +46,20 @@ public class GameManager : NetworkBehaviour
         List<int> endangeredPositions = new List<int>();
         foreach (Movement m in board)
         {
+            
             if (m == null) continue;
-            if (mine != (m.team == Team.OTHER)) continue;
+            if (mine == (m.team == Team.OTHER)) continue;
+            Debug.Log("Object : " + m.gameObject.name + " " + m.team);
             List<int> newEndangeredPos = m.Endanger();
 
             foreach(int pos in newEndangeredPos)
             {
+                print(pos);
                 endangeredPositions.Add(pos);
             }
         }
-        foreach (int n in endangeredPositions)
-            print(n);
+        //foreach (int n in endangeredPositions)
+         //   print(n);
 
         return false;
     }

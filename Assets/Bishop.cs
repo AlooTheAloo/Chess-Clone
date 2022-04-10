@@ -52,7 +52,7 @@ public class Bishop : MonoBehaviour
 
 
             if (!GameManager.PieceExists(destX, destY)) { return true; }
-            if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == Team.MINE) return false;
+            if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
             else
             {
                 return true;
