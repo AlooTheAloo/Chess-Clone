@@ -42,8 +42,7 @@ public class GameManager : NetworkBehaviour
     {
         foreach(Movement m in board)
         {
-            print(m.gameObject.name);
-            //if (m == null) continue;
+            if (m == null) continue;
             //if (m.team == Team.MINE != mine) continue;
             List<int> validMoves = new List<int>();
             for (int i = 0; i < 8; i++)
