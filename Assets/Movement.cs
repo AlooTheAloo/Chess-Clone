@@ -160,12 +160,18 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 case PieceType.Queen: GetComponent<Queen>().RefreshPos(destX, destY); break;
                 case PieceType.King: GetComponent<King>().RefreshPos(destX, destY); break;
             }
+            if(type == PieceType.Pawn && targetY == 7)
+            {
+               
+            }
             return new Vector2(targetX, targetY);
 
         }
         else return origLocalPos;
 
     }
+
+
 
     
 
