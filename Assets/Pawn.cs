@@ -43,70 +43,136 @@ public class Pawn : MonoBehaviour
     public List<string> FindEndangeredPositions()
     {
         List<string> retval = new List<string>();
-        if(GetComponent<Movement>().team == Team.MINE)
+
+        if (!isQueen)
         {
-            print("My pawn");
-            retval.Add(currPosX + 1 + "|" + (currPosY + 1));
-            retval.Add(currPosX - 1 + "|" + (currPosY + 1));
+            if (GetComponent<Movement>().team == Team.MINE)
+            {
+                retval.Add(currPosX + 1 + "|" + (currPosY + 1));
+                retval.Add(currPosX - 1 + "|" + (currPosY + 1));
+            }
+            else
+            {
+                retval.Add(currPosX + 1 + "|" + (currPosY - 1));
+                retval.Add(currPosX - 1 + "|" + (currPosY - 1));
+            }   
         }
         else
         {
-            print("Other pawn");
-            retval.Add(currPosX + 1 + "|" + (currPosY - 1));
-            retval.Add(currPosX - 1 + "|" + (currPosY - 1));
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (Validate(i, j))
+                        retval.Add(i + "|" + j);
         }
         return retval;
+
     }
     
 
     public bool Validate(int destX, int destY)
     {
        if(!isQueen) {
-        if (destX == currPosX && destY == currPosY) return false;
-        if (destY <= currPosY) return false;
-            //Can do double
-            if (!hasDoneFirstMove)
+
+            if(GetComponent<Movement>().team == Team.MINE)
             {
-                if (destX - currPosX == 0 && destY - currPosY <= 2)
+                if (destX == currPosX && destY == currPosY) return false;
+                if (destY <= currPosY) return false;
+                //Can do double
+                if (!hasDoneFirstMove)
                 {
-                    if (destY - currPosY == 2)
+                    if (destX - currPosX == 0 && destY - currPosY <= 2)
                     {
-                        if (GameManager.PieceExists(destX, destY) || GameManager.PieceExists(destX, destY - 1)) return false;
+                        if (destY - currPosY == 2)
+                        {
+                            if (GameManager.PieceExists(destX, destY) || GameManager.PieceExists(destX, destY - 1)) return false;
+                        }
+                        else if (GameManager.PieceExists(destX, destY)) return false;
+                        return true;
                     }
-                    else if (GameManager.PieceExists(destX, destY)) return false;
-                    return true;
+                    else
+                    {
+                        if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destY - currPosY == 1)
+                        {
+                            if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
+                            //Eat the piece
+                            return true;
+                        }
+                        else return false;
+                    }
                 }
                 else
                 {
-                    if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destY - currPosY == 1)
+                    if (destX - currPosX == 0 && destY - currPosY == 1)
                     {
-                        if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
-                        //Eat the piece
+                        if (GameManager.PieceExists(destX, destY)) return false;
                         return true;
                     }
-                    else return false;
+                    else
+                    {
+                        if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destY - currPosY == 1)
+                        {
+                            if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
+                            print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);
+                            //Eat the piece
+                            return true;
+                        }
+                        else return false;
+                    }
                 }
             }
             else
             {
-                if (destX - currPosX == 0 && destY - currPosY == 1)
+                if (destX == currPosX && destY == currPosY) return false;
+                if (destY >= currPosY) return false;
+                //Can do double
+                if (currPosY == 6)
                 {
-                    if (GameManager.PieceExists(destX, destY)) return false;
-                    return true;
+                    if (destX - currPosX == 0 && currPosY - destY <= 2)
+                    {
+                        if (destY - currPosY == 2)
+                        {
+                            if (GameManager.PieceExists(destX, destY) || GameManager.PieceExists(destX, destY - 1)) return false;
+                        }
+                        else if (GameManager.PieceExists(destX, destY)) return false;
+                        return true;
+                    }
+                    else
+                    {
+                        if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && currPosY - destY == 1)
+                        {
+                            if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
+                            //Eat the piece
+                            return true;
+                        }
+                        else return false;
+                    }
                 }
                 else
                 {
-                    if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && destY - currPosY == 1)
+                    if (destX - currPosX == 0 && currPosY - destY == 1)
                     {
-                        if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
-                        print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);
-                        //Eat the piece
+                        if (GameManager.PieceExists(destX, destY)) return false;
                         return true;
                     }
-                    else return false;
+                    else
+                    {
+                        if (GameManager.PieceExists(destX, destY) && Mathf.Abs(destX - currPosX) == 1 && currPosY - destY == 1)
+                        {
+                            if (GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team) return false;
+                            print(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team);
+                            //Eat the piece
+                            return true;
+                        }
+                        else return false;
+                    }
                 }
+
             }
+            
         }
+
+
+       //Is a queen now
         else
         {
             if (destY == currPosY && destX == currPosX) return false;

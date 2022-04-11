@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &9485805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &9485806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &27333795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &27333796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 0
+  isDestroyed: 0
 --- !u!114 &29909613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +480,142 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &40919614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 40919615}
+  - component: {fileID: 40919617}
+  - component: {fileID: 40919616}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &40919615
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40919614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1114040581}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -288, y: 55.693}
+  m_SizeDelta: {x: 200, y: 111.3866}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &40919616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40919614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Checkmate!
+
+    You won!'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: -76.26816}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &40919617
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40919614}
+  m_CullTransparentMesh: 1
 --- !u!1 &50548421
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,6 +893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &69137797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,6 +908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &69137798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,6 +1261,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154152532}
   m_CullTransparentMesh: 1
+--- !u!1 &165585583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165585584}
+  - component: {fileID: 165585586}
+  - component: {fileID: 165585585}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &165585584
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165585583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 259715464}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -288, y: 55.693}
+  m_SizeDelta: {x: 200, y: 111.3866}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &165585585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165585583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Checkmate!
+
+    You lost!'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: -76.26816}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &165585586
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165585583}
+  m_CullTransparentMesh: 1
 --- !u!1 &185896773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,6 +1501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 1
+  isDestroyed: 0
 --- !u!114 &189756394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,6 +1654,118 @@ RectTransform:
   m_AnchoredPosition: {x: -40, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &223974226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223974227}
+  - component: {fileID: 223974229}
+  - component: {fileID: 223974228}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &223974227
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1114040581}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -288, y: -29.1}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &223974228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2bae2c09016c0b4429f8550e2653573f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &223974229
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223974226}
+  m_CullTransparentMesh: 1
+--- !u!1 &259715463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259715464}
+  m_Layer: 5
+  m_Name: You Lost :(
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &259715464
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259715463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 165585584}
+  - {fileID: 1577749884}
+  m_Father: {fileID: 633987595}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &260433423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &260433426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1441,6 +1834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &260433427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1546,6 +1940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 1
+  isDestroyed: 0
 --- !u!114 &271926954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1801,6 +2196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 0
+  isDestroyed: 0
 --- !u!114 &306083997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1906,6 +2302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 1
+  isDestroyed: 0
 --- !u!114 &358201164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,6 +2408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   team: 1
+  isDestroyed: 0
 --- !u!114 &365131262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2402,6 +2800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &408066727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,6 +2815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &408066728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2582,6 +2982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &433730685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,6 +2997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &433730686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2687,6 +3089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &438298297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2701,6 +3104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &438298298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3145,6 +3549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 1
+  isDestroyed: 0
 --- !u!114 &500858126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3287,6 +3692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &537972606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3301,6 +3707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &537972607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3406,6 +3813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 0
+  isDestroyed: 0
 --- !u!114 &570343736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3497,6 +3905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &593289564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3511,6 +3920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &593289565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3699,6 +4109,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626272742}
   m_CullTransparentMesh: 1
+--- !u!1 &633987594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 633987595}
+  m_Layer: 5
+  m_Name: EndScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &633987595
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633987594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 259715464}
+  - {fileID: 1114040581}
+  m_Father: {fileID: 1462573082}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &634497843
 GameObject:
   m_ObjectHideFlags: 0
@@ -3953,6 +4400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   team: 1
+  isDestroyed: 0
 --- !u!114 &655283465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4245,6 +4693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   team: 0
+  isDestroyed: 0
 --- !u!114 &695243008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4350,6 +4799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 0
+  isDestroyed: 0
 --- !u!114 &699971477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4585,6 +5035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 0
+  isDestroyed: 0
 --- !u!114 &769083625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5065,6 +5516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 1
+  isDestroyed: 0
 --- !u!114 &821567204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5231,6 +5683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &843964097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5245,6 +5698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &843964098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5486,6 +5940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &851884081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5500,6 +5955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &851884082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5591,6 +6047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &859366170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5605,6 +6062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &859366171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5959,6 +6417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &890945161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5973,6 +6432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &890945162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6064,6 +6524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &898524056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6116,6 +6577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!1 &906871591
 GameObject:
   m_ObjectHideFlags: 0
@@ -6258,6 +6720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 0
+  isDestroyed: 0
 --- !u!114 &908043473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6657,6 +7120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &977752060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6671,6 +7135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &977752061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6813,6 +7278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 1
+  isDestroyed: 0
 --- !u!114 &979680942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7166,6 +7632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1038156152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7180,6 +7647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1038156153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7285,6 +7753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 1
+  isDestroyed: 0
 --- !u!114 &1041798101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7376,6 +7845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1067198812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7390,6 +7860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &1067198813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7503,6 +7974,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082192625}
   m_CullTransparentMesh: 1
+--- !u!1 &1114040580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114040581}
+  m_Layer: 5
+  m_Name: You Win :)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1114040581
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114040580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 40919615}
+  - {fileID: 223974227}
+  m_Father: {fileID: 633987595}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1115930870
 GameObject:
   m_ObjectHideFlags: 0
@@ -7631,6 +8139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1116224597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7645,6 +8154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &1116224598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7862,6 +8372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 1
+  isDestroyed: 0
 --- !u!114 &1154001293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8043,6 +8554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 0
+  isDestroyed: 0
 --- !u!114 &1181421939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8471,6 +8983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1256415926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8485,6 +8998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1256415927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8590,6 +9104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 0
+  isDestroyed: 0
 --- !u!114 &1264338550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8681,6 +9196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1273735259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8695,6 +9211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1273735260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8823,6 +9340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1282322754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8837,6 +9355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &1282322755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8942,6 +9461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   team: 0
+  isDestroyed: 0
 --- !u!114 &1283501262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9033,6 +9553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1303528448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9047,6 +9568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &1303528449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9212,6 +9734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1334934051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9226,6 +9749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1334934052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9707,6 +10231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 1
+  isDestroyed: 0
 --- !u!114 &1413159016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9821,7 +10346,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -9838,6 +10363,7 @@ RectTransform:
   m_Children:
   - {fileID: 1405415782}
   - {fileID: 880942260}
+  - {fileID: 633987595}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10050,6 +10576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1478096660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10064,6 +10591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1478096661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10304,6 +10832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1540508692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10318,6 +10847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1540508693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10423,6 +10953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   team: 1
+  isDestroyed: 0
 --- !u!114 &1550617687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10528,6 +11059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 1
+  isDestroyed: 0
 --- !u!114 &1554760783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10633,6 +11165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   team: 0
+  isDestroyed: 0
 --- !u!114 &1562905470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10738,6 +11271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 1
+  isDestroyed: 0
 --- !u!114 &1566394506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10813,6 +11347,81 @@ RectTransform:
   m_AnchoredPosition: {x: 80, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1577749883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1577749884}
+  - component: {fileID: 1577749886}
+  - component: {fileID: 1577749885}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1577749884
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577749883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 259715464}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -288, y: -29.1}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1577749885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577749883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1edfab10dec640d47895e697b19241f0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1577749886
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577749883}
+  m_CullTransparentMesh: 1
 --- !u!1 &1593919603
 GameObject:
   m_ObjectHideFlags: 0
@@ -10941,6 +11550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1611236010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10955,6 +11565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1611236011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11097,6 +11708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 1
+  isDestroyed: 0
 --- !u!114 &1617766111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11263,6 +11875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1621075027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11277,6 +11890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &1621075028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11531,6 +12145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 0
+  isDestroyed: 0
 --- !u!114 &1653287635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11771,6 +12386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1723326404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11785,6 +12401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1723326405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12081,6 +12698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   team: 0
+  isDestroyed: 0
 --- !u!114 &1784162362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12261,6 +12879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   team: 0
+  isDestroyed: 0
 --- !u!114 &1804457732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12546,7 +13165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Port: 727
+  Port: 6969
   DualMode: 1
   NoDelay: 1
   Interval: 10
@@ -12642,6 +13261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1888143865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12656,6 +13276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &1888143866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12859,6 +13480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1927290789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12873,6 +13495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 0
+  isDestroyed: 0
 --- !u!114 &1927290790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13001,6 +13624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1963269554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13015,6 +13639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1963269555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13120,6 +13745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   team: 0
+  isDestroyed: 0
 --- !u!114 &1964943267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13211,6 +13837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPosX: 0
   currPosY: 0
+  isQueen: 0
 --- !u!114 &1967273192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13225,6 +13852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   team: 1
+  isDestroyed: 0
 --- !u!114 &1967273193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13793,6 +14421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   team: 1
+  isDestroyed: 0
 --- !u!114 &2058406200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13898,6 +14527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   team: 0
+  isDestroyed: 0
 --- !u!114 &2107940625
 MonoBehaviour:
   m_ObjectHideFlags: 0

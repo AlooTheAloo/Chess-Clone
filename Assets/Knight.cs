@@ -9,7 +9,6 @@ public class Knight : MonoBehaviour
     public int currPosY = 0;
     public void RefreshPos(int destX, int destY)
     {
-        Debug.Log("Called with " + destX + ", " + destY);
         currPosX = destX;
         currPosY = destY;
     }
@@ -37,8 +36,8 @@ public class Knight : MonoBehaviour
     public List<string> FindEndangeredPositions()
     {
         List<string> retval = new List<string>();
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 7; j++)
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
                 if (Validate(i, j))
                     retval.Add(i + "|" + j);
         return retval;

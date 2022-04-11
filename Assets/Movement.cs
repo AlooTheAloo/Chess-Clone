@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private const float maxBoardSize = 150f;
     private Vector2 origPos;
     private Vector2 origLocalPos;
-
+    public bool isDestroyed;
     private void Start()
     {
         NetworkServer.SpawnObjects();
@@ -34,36 +34,65 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         gameObject.transform.position = eventData.position;
     }
 
+
+    public List<string> GetValidMoves()
+    {
+
+        //All valid moves, stored as the form x|y
+        List<string> retVal = new List<string>();
+        for (int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                if(validate(i, j)) retVal.Add(i + "|" + j);
+            }
+        }
+
+
+        return retVal;
+    }
+
+
+
     public void OnEndDrag(PointerEventData eventData)
     {
         if (team != Team.MINE || !GameManager.instance.myTurn) return;
+       //Out the board, cancel move
         if (transform.localPosition.x > maxBoardSize ||
             transform.localPosition.x < -maxBoardSize ||
             transform.localPosition.y > maxBoardSize ||
             transform.localPosition.y < -maxBoardSize
             )
-        {
-            print(transform.localPosition.x);
-            print(transform.localPosition.y);
             transform.position = origPos;
-        }
+        
         //In the board
         else
         {
-            Vector2 rtn = RoundToNearest(transform.localPosition, 40);
-            transform.localPosition = rtn;
+            Vector2 rtn = RoundToNearest(transform.localPosition, 40); //Verifies if the move is valid
+            transform.localPosition = rtn;  
             if (rtn == origLocalPos) return;
             if (GameManager.instance.CheckForCheck(false))
             {
+                GameManager.instance.DestroyMarkedPieces(false);
                 print("You are in check, you can't move there!");
                 transform.localPosition = origLocalPos;
                 RefreshAllPos();
                 return;
             }
+            GameManager.instance.DestroyMarkedPieces(true);
             GameManager.instance.myTurn = false;
+            //Check for Checkmate
             GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId, WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
+            StartCoroutine(WaitforCheckmate());
 
         }
+    }
+
+
+    private IEnumerator WaitforCheckmate()
+    {
+        yield return new WaitForSeconds(0.2f);
+        GameManager.instance.CheckForCheckMate();
     }
 
     public void RefreshAllPos()
@@ -85,9 +114,9 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     
 
 
-    public void MovePiece(int destX, int destY)
+    public void MovePiece(int destX, int destY, bool changeSprite)
     {
-        transform.localPosition = new Vector2(ScreenToWorld(destX), ScreenToWorld(destY));
+        if(changeSprite) transform.localPosition = new Vector2(ScreenToWorld(destX), ScreenToWorld(destY));
         switch (type) {
             case PieceType.Pawn: GetComponent<Pawn>().RefreshPos(destX, destY); break;
             case PieceType.Knight: GetComponent<Knight>().RefreshPos(destX, destY); break;
@@ -99,6 +128,25 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
     }
+
+
+    public bool SimulateMovePiece(int destX, int destY)
+    {
+        int origX = (int) GetPosition().x;
+        int origY = (int) GetPosition().y;
+        GameObject pe = GameManager.PieceExists(destX, destY);
+        
+        if (pe)
+        {
+            pe.GetComponent<Movement>().isDestroyed = true;
+        }
+        MovePiece(destX, destY, false);
+        bool retVal = GameManager.instance.CheckForCheck(true);
+        GameManager.instance.DestroyMarkedPieces(false);
+        MovePiece(origX, origY, false);
+        return retVal;
+    }
+
     private int WorldToScreen(float pos)
     {
         List<float> list = new List<float>();
@@ -130,6 +178,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             case PieceType.Queen: return GetComponent<Queen>().Validate(destX, destY);
             case PieceType.King: return GetComponent<King>().Validate(destX, destY);
         }
+        
         return false;
     }
 
@@ -147,7 +196,22 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         return retval;
     }
 
+    public Vector2 GetPosition()
+    {
+        Vector2 retVal = new Vector2();
 
+        switch (type)
+        {
+            case PieceType.Pawn: retVal.x = GetComponent<Pawn>().currPosX; retVal.y = GetComponent<Pawn>().currPosY; break;
+            case PieceType.Knight: retVal.x = GetComponent<Knight>().currPosX; retVal.y = GetComponent<Knight>().currPosY; break;
+            case PieceType.Bishop: retVal.x = GetComponent<Bishop>().currPosX; retVal.y = GetComponent<Bishop>().currPosY; break;
+            case PieceType.Rook: retVal.x = GetComponent<Rook>().currPosX; retVal.y = GetComponent<Rook>().currPosY; break;
+            case PieceType.Queen: retVal.x = GetComponent<Queen>().currPosX; retVal.y = GetComponent<Queen>().currPosY; break;
+            case PieceType.King: retVal.x = GetComponent<King>().currPosX; retVal.y = GetComponent<King>().currPosY; break;
+        }
+        return retVal;
+
+    }
 
     private Vector2 RoundToNearest(Vector2 pos, int mult)
     {
@@ -183,8 +247,10 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             if (GameManager.PieceExists(destX, destY))
             {
-                Destroy(GameManager.PieceExists(destX, destY));
-                GameManager.instance.CmdDestroy(destX, destY);            
+                GameManager.PieceExists(destX, destY).GetComponent<Movement>().isDestroyed = true;
+                //Destroy(GameManager.PieceExists(destX, destY));
+                //Debug.Log("Piece destroyed!");
+               //GameManager.instance.CmdDestroy(destX, destY);            
             }
             switch (type)
             {

@@ -35,9 +35,10 @@ public class Queen : MonoBehaviour
 
     public List<string> FindEndangeredPositions()
     {
+
         List<string> retval = new List<string>();
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 7; j++)
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
                 if (Validate(i, j))
                     retval.Add(i + "|" + j);
         return retval;
