@@ -85,14 +85,12 @@ public class GameManager : NetworkBehaviour
             //For example, you have -1|1 it will convert to {-1, 1}, and -1 as a string is length > 1
             if (s.Split('|')[0].Length > 1 || s.Split('|')[1].Length > 1) continue;
 
-            if (PieceExists(s.Split('|')[0].ToCharArray()[0] - '0', s.Split('|')[1].ToCharArray()[0] - '0')) {
-                if (PieceExists(s.Split('|')[0].ToCharArray()[0] - '0', s.Split('|')[1].ToCharArray()[0] - '0').GetComponent<Movement>().type == PieceType.King)
-                {
-
-                    //The king is in danger!
-                    return true;
-                }
-            }
+            GameObject g = PieceExists(s.Split('|')[0].ToCharArray()[0] - '0', s.Split('|')[1].ToCharArray()[0] - '0');
+            if (g) 
+                if (g.GetComponent<Movement>().type == PieceType.King)
+                    if(g.GetComponent<Movement>().team == (mine ? Team.OTHER : Team.MINE))
+                        //The king is in danger!
+                        return true;
         }
         return false;
     }
