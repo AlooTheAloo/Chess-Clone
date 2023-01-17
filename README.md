@@ -5,7 +5,7 @@ Connect using your friend's IP address. The game uses port 727, so make sure the
 
 Features not implemented (and that I don't plan to implement tbh)
 - Castling
-- En passant
+- En passant (holy hell)
 - Timer
 - Server validation
 - Game loop
