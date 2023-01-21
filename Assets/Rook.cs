@@ -7,6 +7,9 @@ public class Rook : MonoBehaviour
     private const float maxBoardSize = 150f;
     public int currPosX = 0;
     public int currPosY = 0;
+    public Side side;
+    public static List<Rook> rooks = new List<Rook>();
+    public bool moved;
     public void RefreshPos(int destX, int destY)
     {
         currPosX = destX;
@@ -15,6 +18,10 @@ public class Rook : MonoBehaviour
     private void Start()
     {
         FindForBack();
+        if(GetComponent<Movement>().team == Team.MINE)
+        {
+            rooks.Add(this);
+        }
     }
 
     public void FindForBack()

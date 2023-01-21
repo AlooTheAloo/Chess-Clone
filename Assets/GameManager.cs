@@ -24,19 +24,20 @@ public class GameManager : NetworkBehaviour
 
     public void DestroyMarkedPieces(bool destroy)
     {
+        print(board.Count);
         foreach (Movement m in board)
         {
             if (m == null) continue;
             if (m.isDestroyed)
             {
-                if (destroy)
-                {
-                    int destX = (int)m.GetPosition().x;
-                    int destY = (int)m.GetPosition().y;
-                    Destroy(GameManager.PieceExistsMine(destX, destY));
-                    GameManager.instance.CmdDestroy(destX, destY);
-                }
-                else m.isDestroyed = false;
+               if (destroy)
+               {
+                   int destX = (int)m.GetPosition().x;
+                   int destY = (int)m.GetPosition().y;
+                   Destroy(GameManager.PieceExistsMine(destX, destY));
+                   GameManager.instance.CmdDestroy(destX, destY);
+               }
+               else m.isDestroyed = false;
             }
         }
     }
@@ -61,7 +62,6 @@ public class GameManager : NetworkBehaviour
         List<string> endangeredPositions = new List<string>(); //All positions on the board that are in danger, stored as 1|1 for example
         foreach (Movement m in board)
         {
-
             if (m == null) continue; //Has been destroyed
             if (m.isDestroyed) continue; //To destroy 
 
@@ -75,7 +75,6 @@ public class GameManager : NetworkBehaviour
             //We add those new pos to the endangeredPositions list
             foreach (string pos in newEndangeredPos)
             {
-                print(m + ", " + pos);
                 endangeredPositions.Add(pos);
             }
         }
@@ -150,7 +149,7 @@ public class GameManager : NetworkBehaviour
     {
         //New player has joined, we need to send this to the other clients
         if (!isServer) return;
-        Debug.Log("New Connection! There are now " + NetworkServer.connections.Count + " and the name of my object is " + gameObject.name);
+        Debug.Log("New Connection! There are now " + NetworkServer.connections.Count);
         int serverPlayer = Random.Range(0, 2); //0 - black, 1 - white
         if (NetworkServer.connections.Count == 2) RPCChangeColor(serverPlayer);
     }
@@ -158,7 +157,7 @@ public class GameManager : NetworkBehaviour
     private void RPCChangeColor(int newColor)
     {
         //Create a color
-        myPlayer = newColor;
+        myPlayer = 0; //newColor;
         if (isServer) NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(newColor);
         else NetworkClient.localPlayer.GetComponent<GameManager>().SetMyPlayer(1 - newColor);
     }
@@ -167,7 +166,6 @@ public class GameManager : NetworkBehaviour
     public void SetMyPlayer(int newPlayer)
     {
         myTurn = newPlayer == 0;
-        print("MyTurn : " + myTurn + ". New player : " + newPlayer);
         myPlayer = newPlayer;
         if (newPlayer == 0) GameObject.Find("Pieces").transform.Find("AsWhite").gameObject.SetActive(true);
         else GameObject.Find("Pieces").transform.Find("AsBlack").gameObject.SetActive(true);
@@ -193,18 +191,18 @@ public class GameManager : NetworkBehaviour
         //Move the piece
         PieceExists(7 - xO, 7 - yO).GetComponent<Movement>().MovePiece(7 - xF, 7 - yF, true);
         // Change to queen if its a pawn that just got to the other side
-        StartCoroutine(ChangeIntoQueen(7 - xF, 7 - yF));
+        StartCoroutine(ChangeIntoQueen(7 - xF, 7 - yF, 1 - instance.myPlayer));
 
 
 
     }
-    private IEnumerator ChangeIntoQueen(int destX, int destY)
+    private IEnumerator ChangeIntoQueen(int destX, int destY, int color)
     {
         yield return new WaitForEndOfFrame();
         if (PieceExists(destX, destY).GetComponent<Movement>().type == PieceType.Pawn && destY == 0)
         {
             Debug.Log("Changing to queen");
-            PieceExists(destX, destY).GetComponent<UnityEngine.UI.Image>().sprite = myPlayer == 0 ? whiteQueen : blackQueen;
+            PieceExists(destX, destY).GetComponent<UnityEngine.UI.Image>().sprite = color == 0 ? whiteQueen : blackQueen;
             PieceExists(destX, destY).GetComponent<Pawn>().isQueen = true;
         }
     }

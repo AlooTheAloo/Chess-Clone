@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector2 origPos;
     private Vector2 origLocalPos;
     public bool isDestroyed;
+    public bool dragging;
     private void Start()
     {
         NetworkServer.SpawnObjects();
@@ -23,21 +24,24 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (team != Team.MINE || !GameManager.instance.myTurn) return;
+        if (team != Team.MINE || !GameManager.instance.myTurn || dragging) return;
         origPos = transform.position;
         origLocalPos = transform.localPosition;
+        dragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (team != Team.MINE || !GameManager.instance.myTurn) return;
+        if (team != Team.MINE || !GameManager.instance.myTurn || !dragging) { 
+            eventData.pointerDrag = null;
+            return;
+        }
         gameObject.transform.position = eventData.position;
     }
 
 
     public List<string> GetValidMoves()
     {
-
         //All valid moves, stored as the form x|y
         List<string> retVal = new List<string>();
         for (int i = 0; i < 8; i++)
@@ -57,19 +61,24 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         if (team != Team.MINE || !GameManager.instance.myTurn) return;
+        dragging = false;
        //Out the board, cancel move
         if (transform.localPosition.x > maxBoardSize ||
             transform.localPosition.x < -maxBoardSize ||
             transform.localPosition.y > maxBoardSize ||
             transform.localPosition.y < -maxBoardSize
             )
+        {
             transform.position = origPos;
-        
+
+        }
+
         //In the board
         else
         {
+            print("In the board!");
             Vector2 rtn = RoundToNearest(transform.localPosition, 40); //Verifies if the move is valid
-            transform.localPosition = rtn;  
+            transform.localPosition = rtn;
             if (rtn == origLocalPos) return;
             if (GameManager.instance.CheckForCheck(false))
             {
@@ -79,12 +88,24 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 RefreshAllPos();
                 return;
             }
+
+
+            if (type == PieceType.Rook)
+            {
+                GetComponent<Rook>().moved = true;
+            }
+
             GameManager.instance.DestroyMarkedPieces(true);
             GameManager.instance.myTurn = false;
+            foreach(Movement m in GameManager.board)
+            {
+                if(m.type == PieceType.Pawn) {
+                    m.GetComponent<Pawn>().canGetEnPassented = false;
+                }
+            }
             //Check for Checkmate
             GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId, WorldToScreen(origLocalPos.x), WorldToScreen(origLocalPos.y), WorldToScreen(rtn.x), WorldToScreen(rtn.y));
             StartCoroutine(WaitforCheckmate());
-
         }
     }
 
@@ -130,7 +151,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
 
 
-    public bool SimulateMovePiece(int destX, int destY)
+    public bool SimulateMovePiece(int destX, int destY, bool castle = false)
     {
         int origX = (int) GetPosition().x;
         int origY = (int) GetPosition().y;
@@ -141,9 +162,11 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             pe.GetComponent<Movement>().isDestroyed = true;
         }
         MovePiece(destX, destY, false);
-        bool retVal = GameManager.instance.CheckForCheck(true);
+        bool retVal = GameManager.instance.CheckForCheck(!castle);
         GameManager.instance.DestroyMarkedPieces(false);
+
         MovePiece(origX, origY, false);
+
         return retVal;
     }
 
@@ -241,7 +264,7 @@ public class Movement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             case PieceType.Bishop: valid = GetComponent<Bishop>().Validate(destX, destY); break;
             case PieceType.Rook: valid = GetComponent<Rook>().Validate(destX, destY); break;
             case PieceType.Queen: valid = GetComponent<Queen>().Validate(destX, destY); break;
-            case PieceType.King: valid = GetComponent<King>().Validate(destX, destY); break;
+            case PieceType.King: valid = GetComponent<King>().Validate(destX, destY, true); break;
         }
         if (valid)
         {

@@ -1,5 +1,7 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class King : MonoBehaviour
@@ -7,6 +9,7 @@ public class King : MonoBehaviour
     private const float maxBoardSize = 150f;
     public int currPosX = 0;
     public int currPosY = 0;
+    public bool moved;
     public void RefreshPos(int destX, int destY)
     {
         currPosX = destX;
@@ -43,7 +46,7 @@ public class King : MonoBehaviour
                     retval.Add(i + "|" + j);
         return retval;
     }
-    public bool Validate(int destX, int destY)
+    public bool Validate(int destX, int destY, bool playerMove = false)
     {
         if (destY == currPosY && destX == currPosX) return false;
 
@@ -53,6 +56,57 @@ public class King : MonoBehaviour
                 return !(GameManager.PieceExists(destX, destY).GetComponent<Movement>().team == GetComponent<Movement>().team);    
             else
                 return true;
+        }
+        else if (currPosX - destX == (GameManager.instance.myPlayer == 1 ? 2 : -2) && 
+            destY == currPosY && playerMove && !GameManager.instance.CheckForCheck(false))
+        {
+            Rook targetRook = Rook.rooks.Where(x => x.side == Side.KingSide).ToArray()[0];
+            if (!targetRook.moved)
+            {
+                int middle = currPosX - (GameManager.instance.myPlayer == 1 ? 1 : -1);
+                if (!GetComponent<Movement>().SimulateMovePiece(middle, currPosY, true)
+                && !GetComponent<Movement>().SimulateMovePiece(destX, destY, true))
+                {
+                    if (!GameManager.PieceExists(middle, destY) && !GameManager.PieceExists(destX, destY))
+                    {
+                        GetComponent<Movement>().MovePiece(destX, destY, true);
+                        int rookOrigX = targetRook.currPosX;
+                        int rookOrigY = targetRook.currPosY;
+                        targetRook.GetComponent<Movement>().MovePiece(middle, destY, true);
+                        GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId, rookOrigX, rookOrigY, targetRook.currPosX, targetRook.currPosY);
+
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        else if (currPosX - destX == (GameManager.instance.myPlayer == 1 ? -2 : 2)
+            && destY - currPosY == 0 && playerMove && !GameManager.instance.CheckForCheck(false))
+        {
+            Rook targetRook = Rook.rooks.Where(x => x.side == Side.QueenSide).ToArray()[0];
+
+            if (!targetRook.moved)
+            {
+                int middle = currPosX - (GameManager.instance.myPlayer == 1 ? -1 : 1);
+                if (!GetComponent<Movement>().SimulateMovePiece(middle, currPosY, true)
+                && !GetComponent<Movement>().SimulateMovePiece(destX, destY, true))
+                {
+                    if (!GameManager.PieceExists(middle, destY) && !GameManager.PieceExists(destX, destY) && 
+                        !GameManager.PieceExists(destX + (GameManager.instance.myPlayer == 1 ? -1 : 1), destY) )
+                    {
+                        GetComponent<Movement>().MovePiece(destX, destY, true);
+                        int rookOrigX = targetRook.currPosX;
+                        int rookOrigY = targetRook.currPosY;
+                        targetRook.GetComponent<Movement>().MovePiece(middle, destY, true);
+                        GameManager.instance.CmdMovePiece(NetworkClient.connection.connectionId, rookOrigX, rookOrigY, targetRook.currPosX, targetRook.currPosY);
+
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         else { return false; }
 

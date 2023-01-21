@@ -7,6 +7,7 @@ public class Pawn : MonoBehaviour
 {
     private const float maxBoardSize = 150f;
     bool hasDoneFirstMove;
+    public bool canGetEnPassented;
     public int currPosX = 0;
     public int currPosY = 0;
     public bool isQueen = false;
@@ -32,9 +33,13 @@ public class Pawn : MonoBehaviour
         currPosX = list.IndexOf(Mathf.Round(destX));
         currPosY = list.IndexOf(Mathf.Round(destY));
     }
-    
+
     public void RefreshPos(int destX, int destY)
     {
+        if (Mathf.Abs(destY - currPosY) == 2 && !isQueen)
+        {
+            canGetEnPassented = true;
+        }
         hasDoneFirstMove = true;
         currPosX = destX;
         currPosY = destY;
@@ -80,6 +85,8 @@ public class Pawn : MonoBehaviour
                 //Can do double
                 if (!hasDoneFirstMove)
                 {
+
+
                     if (destX - currPosX == 0 && destY - currPosY <= 2)
                     {
                         if (destY - currPosY == 2)
@@ -116,7 +123,23 @@ public class Pawn : MonoBehaviour
                             //Eat the piece
                             return true;
                         }
-                        else return false;
+                        else
+                        {
+                            // HOLY HELL ITS EN PASSANT !!!!!!!
+                            GameObject targetPiece = GameManager.PieceExists(destX, destY - 1);
+                            if (targetPiece && Mathf.Abs(destX - currPosX) == 1 && destY - currPosY == 1) { 
+                                if(targetPiece.GetComponent<Movement>().type == PieceType.Pawn)
+                                {
+                                    if (targetPiece.GetComponent<Pawn>().canGetEnPassented)
+                                    {
+                                        targetPiece.GetComponent<Movement>().isDestroyed = true;
+                                        GameManager.instance.RPCDestroy(targetPiece.GetComponent<Pawn>().currPosX, targetPiece.GetComponent<Pawn>().currPosY);
+                                        return true;
+                                    }
+                                }
+                            }
+                            return false;
+                        }
                     }
                 }
             }

@@ -11,3 +11,9 @@ public enum PieceType
     Queen,
     King
 }
+
+public enum Side
+{
+    KingSide,
+    QueenSide
+}
